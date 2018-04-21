@@ -22,5 +22,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(r'^$', myapp_views.home, name='home'),
+    path('contato/', myapp_views.contact, name='contact'),
     path('admin/', admin.site.urls),
 ]
