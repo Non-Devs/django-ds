@@ -1,7 +1,14 @@
 from django.db import models
 
 
-class Cursos(models.Model):
+class GerenciaCurso(models.Manager):
+
+	def search(self, query):
+		return self.get_queryset().filter(
+			models.Q(name__icontains=query) | \
+			models.Q(description__icontains=query))
+
+class Curso(models.Model):
 
 	name = models.CharField(
 		verbose_name='Nome',
@@ -32,3 +39,13 @@ class Cursos(models.Model):
 	updated_at = models.DateTimeField(
 		verbose_name='Atualizado em',
 		auto_now=True)
+
+	objects = GerenciaCurso()
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name='Curso'
+		verbose_name_plural='Cursos'
+		ordering=['name']
