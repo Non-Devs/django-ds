@@ -9,3 +9,11 @@ def index(request):
         'cursos': curso
     }
     return render(request, template_name, context)
+
+def details(request, pk):
+    curso = Curso.objects.get(pk=pk)
+    context = {
+        'cursos': curso
+    }
+    template_name = 'cursos/details.html'
+    return render(request, template_name, context)
