@@ -1,37 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
 {% load staticfiles%}
-<p><h2 class="text-center text-uppercase"> Listagem de Cursos do SimpleMOOC</h2></p>
-<p class="text-center">Abaixo a lista de cursos disponíveis na plataforma</p>
 
-{% for course in cursos %}
-	    <p><h4 class="text-center text-uppercase"> {{ course.name }}</h4></p>
-	    <div class="row">
-	      <div class="col-lg-4 ml-auto">
-	        <div class="l-box">
-            <a href="{{ course.get_absolute_url }}">
-            {% if course.image %}
-            <img src="{{ course.image.url }}" alt="{{ course.name }}" />
-            {% else %}
-            <img src="{% static 'img/course-image.jpeg' %}" alt="{{ course.name }}" />
-            {% endif %}
-            </a>
+    <header class="cursos text-white text-center" >
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5 text-center">Listagem de Cursos do PED</h1>
+            <p class="text-center">Abaixo a lista de cursos disponíveis na plataforma</p>
+          </div>
         </div>
-	      </div>
-	      <div class="col-lg-4 mr-auto text-">
+      </div>
+    </header>
+    <br/><br/><br/>
+{% for course in cursos %}
+	    
+    <div class="row">
+	    <div class="col-lg-5 ml-auto">
+	        <div class="l-box">
+            	<a href="{{ course.get_absolute_url }}">
+            	{% if course.image %}
+            	<p><img src="{{ course.image.url }}" alt="{{ course.name }}" /></p>
+            	{% else %}	
+            	<p><img src="http://placehold.it/420x250" alt="{{ course.name }}" /></p>
+            	{% endif %}
+            	</a>
+        	</div>
+      	</div>	
+    	<div class="col-lg-5 mr-auto text-">
+	      	<p><h4 class="text-center text-uppercase"> {{ course.name }}</h4></p>
 	        <div class="l-box">
             <h4 class="content-subhead"><a href="{{ course.get_absolute_url }}" title="">{{ course.name }}</a></h4>
-            {{ course.description|linebreaks }}
-        </div>
-        </div>
-	    </div>
-	    {% empty %}
-<div class="pure-g-r content-ribbon">
-    <div class="pure-u-1">
-        <div class="l-box">
-            <p>Nenhum curso está disponível na plataforma</p>
-        </div>
+            	{{ course.description|linebreaks }}
+        	</div>
+    	</div>
     </div>
-</div>
+    {% empty %}
+	<div class="pure-g-r content-ribbon">
+	    <div class="pure-u-1">
+	        <div class="l-box">
+	            <p>Nenhum curso está disponível na plataforma</p>
+	        </div>
+	    </div>
+	</div>
 {% endfor %}
+<br/><br/><br/>
 {% endblock %}
