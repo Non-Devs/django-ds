@@ -10,8 +10,10 @@ def index(request):
     }
     return render(request, template_name, context)
 
-def details(request, pk):
-    curso = get_object_or_404(Curso, pk=pk)
+
+def details(request, slug):
+
+    curso = get_object_or_404(Curso, slug=slug)
     context = {
         'cursos': curso
     }

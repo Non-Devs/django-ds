@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class GerenciaCurso(models.Manager):
@@ -18,7 +19,11 @@ class Curso(models.Model):
 		verbose_name='Atalho')
 
 	description = models.TextField(
-		verbose_name='Descrição',
+		verbose_name='Descrição simples',
+		blank=True)
+
+	about = models.TextField(
+		verbose_name='Sobre o curso',
 		blank=True)
 
 	start_date = models.DateField(
@@ -44,6 +49,9 @@ class Curso(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def get_absolute_url(self):
+		return reverse('cursos:details', kwargs={'slug': self.slug})
 
 	class Meta:
 		verbose_name='Curso'

@@ -1,11 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="mb-0 text-secondary " id="about">
-      <div class="overlay"></div>
-      <div class="container">
+    <div class="container">
         <div class="row">
             <h1 class="mb-5 text-center"><br>Sobre o curso:</h1></p>
         </div>
-      </div>
+    </div>
 </section>
+<div class="container">
+    <div class="row">
+	    <div class="col-sm">
+	        <div class="l-box">
+	        	<p><h4 class="text-center text-uppercase"> {{ cursos.name }}</h4></p>
+		        <div class="l-box">
+	            	{{ cursos.description|linebreaks }}
+	        	</div>
+        	</div>
+      	</div>	
+    	<div class="col-sm">
+      	    <a href="{{ course.get_absolute_url }}">
+        	{% if course.image %}
+        	<p><img src="{{ course.image.url }}" alt="{{ course.name }}" /></p>
+        	{% else %}	
+        	<p><img src="http://placehold.it/420x250" alt="{{ course.name }}" /></p>
+        	{% endif %}
+        	</a>
+    	</div>
+    </div>
+</div>
+
+<div class="container">
+	<p>{{ cursos.about|linebreaks}}</p>
+</div>
+</br></br></br></br>
+
 {% endblock %}
