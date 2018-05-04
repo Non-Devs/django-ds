@@ -13,11 +13,12 @@
         </div>
       </div>
     </header>
-    <br/><br/><br/>
+    <br/>
+<div class="container">	
 {% for course in cursos %}
-	    
+<br/>
     <div class="row">
-	    <div class="col-lg-5 ml-auto">
+	    <div class="col-sm">
 	        <div class="l-box">
             	<a href="{{ course.get_absolute_url }}">
             	{% if course.image %}
@@ -28,10 +29,9 @@
             	</a>
         	</div>
       	</div>	
-    	<div class="col-lg-5 mr-auto text-">
+    	<div class="col-sm">
 	      	<p><h4 class="text-center text-uppercase"> {{ course.name }}</h4></p>
 	        <div class="l-box">
-            <h4 class="content-subhead"><a href="{{ course.get_absolute_url }}" title="">{{ course.name }}</a></h4>
             	{{ course.description|linebreaks }}
         	</div>
     	</div>
@@ -45,5 +45,7 @@
 	    </div>
 	</div>
 {% endfor %}
-<br/><br/><br/>
+</div>
+
+<br/><br/><br/><br/>
 {% endblock %}
