@@ -5,9 +5,9 @@ from .forms import ContataCurso
 
 def index(request):
 
-    curso=Curso.objects.all()
-    template_name='cursos/index.html'
-    context={
+    curso = Curso.objects.all()
+    template_name = 'cursos/index.html'
+    context = {
         'cursos': curso
     }
     return render(request, template_name, context)
@@ -25,7 +25,7 @@ def details(request, slug):
     else:
         form = ContataCurso()
 
-    context['cursos'] = curso,
+    context['cursos'] = curso
     context['form'] = form
     template_name = 'cursos/details.html'
     return render(request, template_name, context)
