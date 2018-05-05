@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Curso
+from .forms import ContataCurso
+
 
 def index(request):
 
@@ -14,8 +16,16 @@ def index(request):
 def details(request, slug):
 
     curso = get_object_or_404(Curso, slug=slug)
-    context = {
-        'cursos': curso
-    }
+    context = {}
+    if request.method == 'POST':
+        form = ContataCurso(request.POST)
+        if form.is_valid():
+            context['is_valid'] = True
+            form = ContataCurso()
+    else:
+        form = ContataCurso()
+
+    context['cursos'] = curso,
+    context['form'] = form
     template_name = 'cursos/details.html'
     return render(request, template_name, context)

@@ -12,6 +12,10 @@
 	    <div class="col-sm">
 	        <div class="l-box">
 	        	<p><h4 class="text-center text-uppercase"> {{ cursos.name }}</h4></p>
+	        	<h4>Dúvidas?</h4>
+	            <p>
+	                <a href="#contato" title="" class="btn btn-primary">Fale Conosco</a>
+	            </p>
 		        <div class="l-box">
 	            	{{ cursos.description|linebreaks }}
 	        	</div>
@@ -25,6 +29,7 @@
         	<p><img src="http://placehold.it/420x250" alt="{{ course.name }}" /></p>
         	{% endif %}
         	</a>
+
     	</div>
     </div>
 </div>
@@ -32,6 +37,33 @@
 <div class="container">
 	<p>{{ cursos.about|linebreaks}}</p>
 </div>
+
+<div class="container" id="contato">
+        <h3>Tire sua dúvida sobre o Curso</h3>
+        {% if is_valid %}
+        <p>Você enviou o formulário com sucesso</p>
+        {% endif %}
+        <form action="#contato" class="form-horizontal" method="post">
+            {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="col-sm-offset-2 col-sm-10"">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+        </form>
+</div>
+
 </br></br></br></br>
 
 {% endblock %}
