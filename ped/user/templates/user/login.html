@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles%}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Scripts and css ---------->
+
+<div class="container">
+    <div class="wrapper">
+        <form class="form-signin" method="post">
+            {% csrf_token %}
+            <fieldset>
+            <h3 class="form-signin-heading">
+                <b style="color:#FFFFFF !important">Plataforma de Ensino à distância</b>
+            </h3>
+             <b style="color:#FFFFFF !important">   {{ form.non_field_errors }}</b>
+            {{ field.errors }}
+            <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuário" required="" autofocus="" /><br />
+            <input type="password" class="form-control" id="password1" name="password" placeholder="Senha" required="" />
+
+
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="submit">Entrar</button>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
