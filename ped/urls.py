@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include('ped.core.urls')),
     path('cursos/', include('ped.cursos.urls')),
+    path('conta/', include('ped.user.urls')),
     path('admin/', admin.site.urls),
 ]   
 
 if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

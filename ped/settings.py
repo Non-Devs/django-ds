@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ped.core',
+    'ped.user',
     'ped.cursos',
 ]
 
@@ -136,3 +137,9 @@ EMAIL_HOST_PASSWORD = 'senha'
 EMAIL_PORT = 587
 
 CONTACT_EMAIL = 'contato@ped.com'
+
+# Auth
+
+LOGIN_URL = '/user/entrar/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'accounts:logout'
