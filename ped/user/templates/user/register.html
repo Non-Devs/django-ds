@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles%}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Scripts and css ---------->
+
+<div class="container">
+    <div class="wrapper">
+        <form class="form-signin" method="post">
+            {% csrf_token %}
+            <fieldset>
+            <h3 class="form-signin-heading">
+                <b style="color:#000000 !important">Plataforma de Ensino à distância</b>
+            </h3>
+                {% for field in form %}
+                {% if field.errors %}
+                    <div div class="alert alert-danger">
+                        {% for error in field.errors %}
+                            <strong>{{ error|escape }}</strong></br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+
+                <input type="text" class="form-control" name="username" placeholder="Insira o nome de usuário" required="" autofocus="" id="id_username">
+                </br>
+                <input type="password" class="form-control" placeholder="Insira a senha" name="password1" required="" id="id_password1">
+
+                <input type="password" class="form-control" placeholder="Repita a senha" name="password2" required="" id="id_password2">
+
+
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar-se</button>
+
+            </fieldset>
+            <br />
+            Já possui um cadastro? <a href="{% url 'user:login' %}" title="">Entrar</a> <br />
+        </form>
+    </div>
+</div>
+{% endblock %}
