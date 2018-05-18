@@ -142,4 +142,4 @@ CONTACT_EMAIL = 'contato@ped.com'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = 'accounts:logout'
+LOGOUT_URL = 'user:logout'
