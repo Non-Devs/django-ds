@@ -22,38 +22,33 @@
   <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light navbar-static-top">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">PED</a>
-        <a class="navbar-brand" href="{% url 'cursos:index' %}">Cursos</a>
-        <a class="navbar-brand" href="{%  url 'contact' %}">Contato</a>
-        <a class="btn btn-primary" href="{%  url 'user:login' %}">Entrar</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'home' %}">PED</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cursos:index' %}">Cursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%  url 'contact' %}">Contato</a>
+          </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <a class="btn btn-primary " href="{%  url 'user:login' %}">Entrar</a>
+        </form>
       </div>
     </nav>
-
     {% block content %}{% endblock %}
 
     <footer class="footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="#">Sobre</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Contato</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Termos de uso</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Política de privacidade</a>
-              </li>
-            </ul>
             <p class="text-muted small mb-4 mb-lg-0">&copy; Plataforma de ensino à distância 2018. Todos os direitos reservados.</p>
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
@@ -79,9 +74,8 @@
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+        <!-- Bootstrap core JavaScript -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

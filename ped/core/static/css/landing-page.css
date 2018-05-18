@@ -1,6 +1,6 @@
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 0 0 100px;
+    padding-bottom: 1rem;
     /* bottom = footer height */
 }
 
@@ -22,7 +22,7 @@ h6 {
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("/static/img/computer.jpg") no-repeat center center;
+  background: url("/static/img/computer.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -113,8 +113,8 @@ header.masthead h1 {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 3rem;
+  padding-bottom: 6rem;
 }
 
 .cursos {
@@ -139,11 +139,10 @@ header.masthead h1 {
 }
 
 footer.footer {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    overflow: hidden;
 }

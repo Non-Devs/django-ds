@@ -15,17 +15,24 @@
             {% csrf_token %}
             <fieldset>
             <h3 class="form-signin-heading">
-                <b style="color:#FFFFFF !important">Plataforma de Ensino à distância</b>
+                <b style="color:#000000 !important">Plataforma de Ensino à distância</b>
             </h3>
-             <b style="color:#FFFFFF !important">   {{ form.non_field_errors }}</b>
-            {{ field.errors }}
+            {% if form.non_field_errors %}
+                <div div class="alert alert-danger">
+                  {% for error in form.non_field_errors %}
+                      <strong>{{ error|escape }}</strong>
+                  {% endfor %}
+                </div>
+            {% endif %}
             <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuário" required="" autofocus="" /><br />
             <input type="password" class="form-control" id="password1" name="password" placeholder="Senha" required="" />
 
 
             <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="submit">Entrar</button>
             </fieldset>
-
+            <br />
+            Não é cadastrado? <a href="{% url 'user:register' %}" title="">Cadastre-se</a> <br />
+            Esqueceu a senha? <a href="" title="">Nova senha</a> <br />
         </form>
     </div>
 </div>
