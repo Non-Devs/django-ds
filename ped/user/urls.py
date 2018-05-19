@@ -26,4 +26,8 @@ urlpatterns = [
          views.registrar,
          name='register',
          ),
+    path('editar',
+         views.edit,
+         name='edit',
+         ),
 ]

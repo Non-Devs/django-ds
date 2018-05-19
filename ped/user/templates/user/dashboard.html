@@ -5,7 +5,7 @@
     <div class="pure-u-1">
         <ul class="breadcrumb">
             {% block breadcrumb %}
-            <li><a href="{% url 'user:dashboard' %}">Meu Painel</a></li>
+            <li><a href="{% url 'user:dashboard' %}">Meu Painel </a></li>
             {% endblock %}
         </ul>
     </div>
@@ -16,7 +16,7 @@
                 <li><a href="#">Curso 1</a></li>
                 <li><a href="#">Curso 2</a></li>
                 <li class="pure-menu-heading">Minha Conta</li>
-                <li><a href="#">Editar Conta</a></li>
+                <li><a href="{% url 'user:edit' %}">Editar Conta</a></li>
                 <li><a href="#">Editar Senha</a></li>
             </ul>
         </div>

@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "user/dashboard.html" %}
+
+{% block breadcrumb %}
+    {{block.super}}
+        <li>  / </li>
+        <li><a href="{% url 'user:edit' %}"> Editar Conta</a></li>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="container">
+    <div class="wrapper">
+    <form class="form-signin" method="post">
+    {% csrf_token %}
+    {% if success %}
+    <p>Os dados foram alterados com sucesso</p>
+    {% endif %}
+    <fieldset>
+        {{ form.non_field_errors }}
+        {% for field in form  %}
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        {% endfor %}
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar Modificações</button>
+    </fieldset>
+    </form>
+</div>
+</div>
+{% endblock %}
