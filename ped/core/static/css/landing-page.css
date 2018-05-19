@@ -124,8 +124,8 @@ header.masthead h1 {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .call-to-action .overlay {
@@ -145,4 +145,8 @@ footer.footer {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.btn{
+margin-left:10px;
 }

@@ -4,6 +4,11 @@ from django.conf import settings
 from .forms import RegisterForm
 
 
+def dashboard(request):
+    template_name = 'user/dashboard.html'
+    return render(request, template_name)
+
+
 def registrar(request):
     template_name = 'user/register.html'
     if request.method == 'POST':

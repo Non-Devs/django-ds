@@ -5,6 +5,11 @@ from django.contrib.auth.views import login, logout
 app_name = 'user'
 
 urlpatterns = [
+    path('',
+         views.dashboard,
+         name='dashboard',
+         ),
+
     path('entrar',
          login,
          {'template_name': 'user/login.html'},
