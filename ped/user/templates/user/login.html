@@ -32,7 +32,7 @@
             </fieldset>
             <br />
             Não é cadastrado? <a href="{% url 'user:register' %}" title="">Cadastre-se</a> <br />
-            Esqueceu a senha? <a href="" title="">Nova senha</a> <br />
+            Esqueceu a senha? <a href="{% url 'user:password_reset' %}" title="">Nova senha</a> <br />
         </form>
     </div>
 </div>
