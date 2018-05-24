@@ -7,20 +7,25 @@
 {% endblock %}
 
 {% block dashboard_content %}
-<form class="form-signin" method="post">
-    {% csrf_token %}
+
     {% if success %}
     <p>Os dados foram alterados com sucesso</p>
     {% endif %}
-    <fieldset>
-        {{ form.non_field_errors }}
-        {% for field in form  %}
-            {{ field.label_tag }}
-            {{ field }}
-            {{ field.errors }}
-        {% endfor %}
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar Modificações</button>
-    </fieldset>
-</form>
+    <form method="post" class="form-signin">
+      {% csrf_token %}
 
+      {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+          <p >
+            {{ field.label_tag }}<br>
+            {{ field }}
+          </p>
+        </div>
+     {% endfor %}
+      <div class="row float-right mt-2">
+        <a href="{% url 'user:dashboard' %}" class="btn btn-danger mr-2  "> Cancelar </a>
+        <button type="submit" class="btn btn-success mr-5 " > Enviar </button>
+      </div>
+    </form>
 {% endblock %}
