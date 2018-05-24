@@ -140,6 +140,7 @@ CONTACT_EMAIL = 'contato@ped.com'
 
 # Auth
 
-LOGIN_URL = 'user:login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'user:dashboard'
+LOGIN_REDIRECT_URL = 'user:dashboard'
 LOGOUT_URL = 'user:logout'
+AUTH_USER_MODEL = 'user.User'
