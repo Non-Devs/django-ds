@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
 
 class GerenciaCurso(models.Manager):
@@ -13,14 +14,17 @@ class GerenciaCurso(models.Manager):
 class Curso(models.Model):
     name = models.CharField(
         verbose_name='Nome',
-        max_length=100)
+        max_length=100
+    )
 
     slug = models.SlugField(
-        verbose_name='Atalho')
+        verbose_name='Atalho'
+    )
 
     description = models.TextField(
         verbose_name='Descrição simples',
-        blank=True)
+        blank=True
+    )
 
     about = models.TextField(
         verbose_name='Sobre o curso',
@@ -29,21 +33,25 @@ class Curso(models.Model):
     start_date = models.DateField(
         verbose_name='Data de inicio',
         null=True,
-        blank=True)
+        blank=True
+    )
 
     image = models.ImageField(
         upload_to='cursos/images',
         verbose_name='Imagem',
         null=True,
-        blank=True)
+        blank=True
+    )
 
     created_at = models.DateTimeField(
         verbose_name='Criado em',
-        auto_now_add=True)
+        auto_now_add=True
+    )
 
     updated_at = models.DateTimeField(
         verbose_name='Atualizado em',
-        auto_now=True)
+        auto_now=True
+    )
 
     objects = GerenciaCurso()
 
@@ -57,3 +65,47 @@ class Curso(models.Model):
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
         ordering = ['name']
+
+
+class Inscricao(models.Model):
+
+    STATUS_CHOICES = (
+        (0, 'Pendente'),
+        (1, 'Aprovado'),
+        (2, 'Cancelado'),
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Usuário',
+        related_name='inscricao',
+        on_delete='CASCADE'
+    )
+
+    curso = models.ForeignKey(
+        Curso,
+        verbose_name='Curso',
+        related_name='inscricao',
+        on_delete='CASCADE'
+    )
+
+    status = models.IntegerField(
+        'Situação',
+        choices=STATUS_CHOICES,
+        default=0,
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        verbose_name='Criado em',
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        verbose_name='Atualizado em',
+        auto_now=True
+    )
+    class Meta:
+        verbose_name = 'Inscrição'
+        verbose_name_plural = 'Inscrições'
+        unique_together = (('user', 'curso'),)
