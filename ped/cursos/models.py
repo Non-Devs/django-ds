@@ -105,6 +105,11 @@ class Inscricao(models.Model):
         verbose_name='Atualizado em',
         auto_now=True
     )
+
+    def active(self):
+        self.status = 1
+        self.save()
+
     class Meta:
         verbose_name = 'Inscrição'
         verbose_name_plural = 'Inscrições'

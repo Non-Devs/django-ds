@@ -1,36 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="mb-0 text-secondary " id="about">
-    <div class="container">
+    <header class="cursos text-white text-center" >
+      <div class="overlay"></div>
+      <div class="container">
         <div class="row">
-            <h1 class="mb-5 text-center"><br>Sobre o curso:</h1></p>
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5 text-center">{{ cursos.name }}</h1>
+          </div>
         </div>
-    </div>
-</section>
-<div class="container">
+      </div>
+    </header>
+<div class="container" style="margin-top: 2%">
     <div class="row">
-	    <div class="col-sm">
+	    <div class="col">
 	        <div class="l-box">
-	        	<p><h4 class="text-center text-uppercase"> {{ cursos.name }}</h4></p>
-	        	<h4>Dúvidas?</h4>
-	            <p>
-	                <a href="#contato" title="" class="btn btn-primary">Fale Conosco</a>
-	            </p>
 		        <div class="l-box">
 	            	{{ cursos.description|linebreaks }}
 	        	</div>
         	</div>
       	</div>	
-    	<div class="col-sm">
+    	<div class="col-auto">
       	    <a href="{{ course.get_absolute_url }}">
-        	{% if course.image %}
-        	<p><img src="{{ course.image.url }}" alt="{{ course.name }}" /></p>
+        	{% if cursos.image %}
+        	<p><img src="{{ cursos.image.url }}" alt="{{ cursos.name }}" /></p>
         	{% else %}	
-        	<p><img src="http://placehold.it/420x250" alt="{{ course.name }}" /></p>
+        	<p><img src="http://placehold.it/420x250" alt="{{ cursos.name }}" /></p>
         	{% endif %}
         	</a>
 
     	</div>
+        <div class="col-auto">
+            <div class="l-box">
+                <h4>Dúvidas?</h4>
+                <p>
+                    <a href="#contato" title="" class="btn btn-primary">Fale Conosco</a></br>
+                    <a href="{% url 'cursos:inscricao' cursos.slug %}" style="margin-top: 10px" class="btn btn-primary">Inscreva-se</a>
+                </p>
+            </div>
+        </div>  
     </div>
 </div>
 
@@ -45,22 +52,14 @@
         {% endif %}
         <form action="#contato" class="form-horizontal" method="post">
             {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                    <ul class="errorlist">
-                        {% for error in field.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
-                {% endfor %}
-                <div class="col-sm-offset-2 col-sm-10"">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
+            <div class="form-group">
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
+            <div class="col-sm-offset-2 col-sm-10"">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
         </form>
 </div>
 

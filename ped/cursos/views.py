@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Curso
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Curso, Inscricao
 from .forms import ContataCurso
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -30,3 +31,18 @@ def details(request, slug):
     context['form'] = form
     template_name = 'cursos/details.html'
     return render(request, template_name, context)
+
+
+@login_required
+def inscricao(request, slug):
+
+    curso = get_object_or_404(Curso, slug=slug)
+    inscricao, created = Inscricao.objects.get_or_create(
+        user=request.user,
+        curso=curso
+    )
+
+    if created:
+        inscricao.active()
+
+    return redirect('user:dashboard')
