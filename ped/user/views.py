@@ -7,6 +7,7 @@ from django.conf import settings
 from .forms import RegisterForm, EditAccountForm, PasswordResetForm
 from .models import PasswordReset
 from ped.core.utils import generate_hash_key
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -70,8 +71,8 @@ def edit(request):
         form = EditAccountForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
-            form = EditAccountForm(instance=request.user)
-            context['success'] = True
+            messages.success(request, 'Os dados da sua conta foram ajustados com sucesso')
+            return redirect('user:dashboard')
     else:
         form = EditAccountForm(instance=request.user)
     context['form'] = form

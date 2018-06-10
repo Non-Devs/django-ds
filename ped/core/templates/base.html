@@ -49,7 +49,15 @@
         </form>
       </div>
     </nav>
-    {% block content %}{% endblock %}
+    {% if messages %}
+        <aside class="pure-u-1">
+            {% for message in messages%}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </aside>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
 
     <footer class="footer bg-dark">
       <div class="container">

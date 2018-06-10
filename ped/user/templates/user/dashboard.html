@@ -1,11 +1,15 @@
 {% extends "base.html" %}
+{% load staticfiles%}
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
 
 {% block content %}
 <div class="pure-g-r content-ribbon">
     <div class="pure-u-1">
         <ul class="breadcrumb">
             {% block breadcrumb %}
-            <li><a href="{% url 'user:dashboard' %}">Meu Painel</a></li>
+                <li>
+                    <a href="{% url 'user:dashboard' %}">Meu Painel</a>
+                </li>
             {% endblock %}
         </ul>
     </div>

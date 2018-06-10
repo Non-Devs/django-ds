@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Curso, Inscricao
 from .forms import ContataCurso
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 
 def index(request):
 
@@ -44,5 +44,8 @@ def inscricao(request, slug):
 
     if created:
         inscricao.active()
+        messages.sucess(request, 'Você foi inscrito no curso com sucesso')
+    else:
+        messages.info(request, 'Você já está inscrito no curso')    
 
     return redirect('user:dashboard')
