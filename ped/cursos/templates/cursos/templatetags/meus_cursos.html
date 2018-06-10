@@ -1,0 +1,10 @@
+<h5 class="card-title">Meus Cursos</h5>
+<ul>
+    {% for curso in inscricao %}
+    <li>
+        <a href="">{{ curso.curso }}</a>
+    </li>
+    {% empty %}
+    <li>Nenhum curso no momento</li>
+    {% endfor %}
+</ul>

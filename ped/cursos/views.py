@@ -4,6 +4,7 @@ from .forms import ContataCurso
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+
 def index(request):
 
     curso = Curso.objects.all()

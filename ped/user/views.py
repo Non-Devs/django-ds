@@ -8,6 +8,7 @@ from .forms import RegisterForm, EditAccountForm, PasswordResetForm
 from .models import PasswordReset
 from ped.core.utils import generate_hash_key
 from django.contrib import messages
+from ped.cursos.models import Inscricao
 
 User = get_user_model()
 
@@ -15,7 +16,9 @@ User = get_user_model()
 @login_required
 def dashboard(request):
     template_name = 'user/dashboard.html'
-    return render(request, template_name)
+    context = {}
+    context['inscricao'] = Inscricao.objects.filter(user=request.user)
+    return render(request, template_name, context)
 
 
 def registrar(request):
@@ -45,7 +48,9 @@ def password_reset(request):
     form = PasswordResetForm(request.POST or None)
     if form.is_valid():
         form.save()
-        context['success'] = True
+        messages.success(request,
+                         'Sua senha foi resetada com sucesso')
+        return redirect('user:dashboard')
 
     context['form'] = form
     return render(request, template_name, context)
@@ -58,7 +63,9 @@ def password_reset_confirm(request, key):
     form = SetPasswordForm(user=reset.user, data=request.POST or None)
     if form.is_valid():
         form.save()
-        context['success'] = True
+        messages.success(request,
+                         'Sua senha foi resetada com sucesso')
+        return redirect('user:dashboard')
     context['form'] = form
     return render(request, template_name, context)
 
@@ -87,7 +94,9 @@ def edit_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            context['success'] = True
+            messages.success(request,
+                             'Sua senha foi alterada com sucesso')
+            return redirect('user:dashboard')
     else:
         form = PasswordChangeForm(user=request.user)
     context['form'] = form

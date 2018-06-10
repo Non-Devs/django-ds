@@ -19,10 +19,10 @@
 	        	</div>
         	</div>
       	</div>	
-    	<div class="col-auto">
+    	<div class="col-auto border-left">
       	    <a href="{{ course.get_absolute_url }}">
         	{% if cursos.image %}
-        	<p><img src="{{ cursos.image.url }}" alt="{{ cursos.name }}" /></p>
+        	<p><img src="{{ cursos.image.url }}" width="300px" alt="{{ cursos.name }}" /></p>
         	{% else %}	
         	<p><img src="http://placehold.it/420x250" alt="{{ cursos.name }}" /></p>
         	{% endif %}
@@ -45,7 +45,7 @@
 	<p>{{ cursos.about|linebreaks}}</p>
 </div>
 
-<div class="container" id="contato">
+<div class="container border-top" id="contato">
         <h3>Tire sua dúvida sobre o Curso</h3>
         {% if is_valid %}
         <p>Você enviou o formulário com sucesso</p>
