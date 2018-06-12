@@ -14,43 +14,52 @@
             {% endblock %}
         </ul>
     </div>
-<ul>
     <div class="row mb-5">
         <div class="col-auto">
-            <div class="card">
+            <div class="card" style="width: 20rem;">
                 <div class="card-body">
+                    <h5 class="card-text"> Bem vindo, {{ user }} </h5>
                     {% load_meus_cursos user as inscricao %}
-                    <h5 class="card-title">Meus Cursos</h5>
+                    <h6 class="card-title">Cursos</h6>
                     <ul>
                         {% for curso in inscricao %}
-                        <li>
-                            <a href="">{{ curso.curso }}</a>
-                        </li>
+                        <i class="fa fa-book"></i>
+                        <a href="">{{ curso.curso }}</a>
                         {% empty %}
                         <li>Nenhum curso no momento</li>
                         {% endfor %}
                     </ul>
                     <p></p>
-                    <h5 class="card-title">Minha Conta</h5>
+                    <h6 class="card-title">Conta</h6>
                     <ul>
-                       <li><a href="{% url 'user:edit' %}">Editar Conta</a></li>
-                       <li><a href="{% url 'user:edit_password' %}">Editar Senha</a></li>
+                       <i class="fa fa-cog"></i>
+                        <a href="{% url 'user:edit' %}">Configurações de Conta</a>
+                       <br>
+                        <i class="fa fa-lock"></i>
+                        <a href="{% url 'user:edit_password' %}">  Editar Senha</a>
                     </ul>
                 </div>
             </div>
         </div>
-
         <div class="col-auto">
-                <div class="card">
-                    <div class="card-body">
-                         {% block dashboard_content %}
-                        <p><strong>Usuário</strong>: {{ user }}</p>
-                        <p><strong>E-mail</strong>: {{ user.email }}</p>
-                        {% endblock %}
+            <div class="card" style="width: 50rem;">
+                <div class="card-body">
+                    {% block dashboard_content %}
+                    <h5 class="card-title">Meus Cursos</h5>
+                    {% for curso in inscricao %}
+                    <h3>{{ curso.curso }} ({{ curso.curso.start_date|date:'d/m/Y'| default:'Sem data' }})</h3>
+                    {{ curso.curso.description|linebreaks }}
+                    <div class="row float-right mt-2">
+                        <button class="btn btn-success  mr-2"> Acessar </button>
+                        <button class="btn btn-danger  mr-4" > Cancelar </button>
+                    </div>
+                    {% empty %}
+                        <li>Nenhum curso no momento</li>
+                    {% endfor %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
-        </div>
-    </ul>
+    </div>
 </div>
 {% endblock %}
