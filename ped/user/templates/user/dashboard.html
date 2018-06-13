@@ -19,13 +19,13 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-text"> Bem vindo, {{ user }} </h5>
-                    {% block extra_menu %}
+                    {% block menu_options %}
                     {% load_meus_cursos user as inscricao %}
                     <h6 class="card-title">Cursos</h6>
                     <ul>
                         {% for curso in inscricao %}
                         <i class="fa fa-book"></i>
-                        <a href="">{{ curso.curso }}</a>
+                        <a href="{% url 'cursos:anuncios' curso.curso.slug %}">{{ curso.curso }}</a>
                         {% empty %}
                         <li>Nenhum curso no momento</li>
                         {% endfor %}

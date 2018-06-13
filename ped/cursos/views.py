@@ -64,5 +64,7 @@ def anuncios(request, slug):
             messages.error(request, 'A sua inscrição está pendente!')
             return redirect('user:dashboard')
     template = 'cursos/anuncios.html'
-    context = {}
+    context = {
+        'curso  ': curso
+    }
     return render(request, template, context)
