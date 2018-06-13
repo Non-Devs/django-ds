@@ -50,3 +50,19 @@ def inscricao(request, slug):
         messages.info(request, 'Você já está inscrito no curso')    
 
     return redirect('user:dashboard')
+
+@login_required
+def anuncios(request, slug):
+    curso = get_object_or_404(Curso, slug=slug)
+    if not request.user.is_staff:
+        inscricao = get_object_or_404(
+            Inscricao,
+            user=request.user,
+            curso=curso
+        )
+        if not inscricao.is_approved():
+            messages.error(request, 'A sua inscrição está pendente!')
+            return redirect('user:dashboard')
+    template = 'cursos/anuncios.html'
+    context = {}
+    return render(request, template, context)

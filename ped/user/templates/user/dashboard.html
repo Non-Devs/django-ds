@@ -19,6 +19,7 @@
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-text"> Bem vindo, {{ user }} </h5>
+                    {% block extra_menu %}
                     {% load_meus_cursos user as inscricao %}
                     <h6 class="card-title">Cursos</h6>
                     <ul>
@@ -37,6 +38,7 @@
                        <br>
                         <i class="fa fa-lock"></i>
                         <a href="{% url 'user:edit_password' %}">  Editar Senha</a>
+                        {% endblock %}
                     </ul>
                 </div>
             </div>
