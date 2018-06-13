@@ -45,7 +45,7 @@ def inscricao(request, slug):
 
     if created:
         inscricao.active()
-        messages.sucess(request, 'Você foi inscrito no curso com sucesso')
+        messages.success(request, 'Você foi inscrito no curso com sucesso')
     else:
         messages.info(request, 'Você já está inscrito no curso')    
 
