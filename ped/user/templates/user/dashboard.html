@@ -52,7 +52,7 @@
                     <h3>{{ curso.curso }} ({{ curso.curso.start_date|date:'d/m/Y'| default:'Sem data' }})</h3>
                     {{ curso.curso.description|linebreaks }}
                     <div class="row float-right mt-2">
-                        <button class="btn btn-success  mr-2"> Acessar </button>
+                        <a href="{% url 'cursos:anuncios' curso.curso.slug %}" <button class="btn btn-success  mr-2"> Acessar </button></a>
                         <button class="btn btn-danger  mr-4" > Cancelar </button>
                     </div>
                     {% empty %}
