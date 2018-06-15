@@ -1,23 +1,4 @@
-{% extends "user/dashboard.html" %}
-
-{% block menu_options %}
-
-<ul>
-    {{curso}}
-
-    <i class="fa fa-video-camera"></i>
-    <a href="#">Aulas e Materiais</a>
-    <br>
-    <i class="fa fa-info-circle"></i>
-    <a href="#">Informações</a>
-    <br>
-    <i class="fa fa-envelope"></i>
-    <a href="#">Anuncios</a>
-    <br>
-    <i class="fa fa-comments"></i>
-    <a href="#">Forum de Duvidas</a>
-</ul>
-{{ block.super }}
+{% extends "cursos/curso_dashboard.html" %
 {% endblock %}
 
 {% block dashboard_content %}

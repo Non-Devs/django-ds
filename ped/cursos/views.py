@@ -52,6 +52,23 @@ def inscricao(request, slug):
     return redirect('user:dashboard')
 
 @login_required
+def undo_inscricao(request, slug):
+    curso = get_object_or_404(Curso, slug=slug)
+    inscricao = get_object_or_404(
+        Inscricao,
+        user=request.user,
+        curso=curso
+    )
+    if request.method == 'POST':
+        pass
+    template = 'cursos/undo_inscricao.html'
+    context = {
+        'inscricao': inscricao,
+        'cursos': curso,
+    }
+    return render(request, template, context)
+
+@login_required
 def anuncios(request, slug):
     curso = get_object_or_404(Curso, slug=slug)
     if not request.user.is_staff:
