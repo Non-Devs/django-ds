@@ -53,7 +53,7 @@
                     {{ curso.curso.description|linebreaks }}
                     <div class="row float-right mt-2">
                         <a href="{% url 'cursos:anuncios' curso.curso.slug %}"><button class="btn btn-success  mr-2"> Acessar </button></a>
-                        <a href="{% url 'cursos:undo_inscricao' curso.curso.slug %}"><button class="btn btn-danger  mr-4" > Cancelar </button> </a>
+                        <a href="{% url 'cursos:undo_inscricao' curso.curso.slug %}"><button class="btn btn-danger  mr-4" > Cancelar Inscrição</button> </a>
                     </div>
                     {% empty %}
                         <li>Nenhum curso no momento</li>

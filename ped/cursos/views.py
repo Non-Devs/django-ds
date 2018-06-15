@@ -60,7 +60,9 @@ def undo_inscricao(request, slug):
         curso=curso
     )
     if request.method == 'POST':
-        pass
+        inscricao.delete()
+        messages.success(request,'Sua inscrição foi cancelada!')
+        return redirect('user:dashboard')
     template = 'cursos/undo_inscricao.html'
     context = {
         'inscricao': inscricao,
