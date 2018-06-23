@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Curso, Inscricao
+from .models import Curso, Inscricao, Anuncio
 from .forms import ContataCurso
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -86,5 +86,25 @@ def anuncios(request, slug):
     context = {
         'curso': curso,
         'anuncios': curso.anuncios.all()
+    }
+    return render(request, template, context)
+
+@login_required
+def exibir_anuncio(request, slug, pk):
+    curso = get_object_or_404(Curso, slug=slug)
+    if not request.user.is_staff:
+        inscricao = get_object_or_404(
+            Inscricao,
+            user=request.user,
+            curso=curso
+        )
+        if not inscricao.is_approved():
+            messages.error(request, 'A sua inscrição está pendente!')
+            return redirect('user:dashboard')
+    template = 'cursos/exibir_anuncio.html'
+    anuncios = get_object_or_404(curso.Anuncio.all(), pk=pk)
+    context = {
+        'curso': curso,
+        'anuncios': anuncios,
     }
     return render(request, template, context)
