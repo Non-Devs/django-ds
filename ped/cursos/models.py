@@ -120,7 +120,7 @@ class Inscricao(models.Model):
 
 class Anuncio(models.Model):
 
-    cursos = models.ForeignKey(Curso, verbose_name='Curso', on_delete=models.CASCADE)
+    cursos = models.ForeignKey(Curso, verbose_name='Curso',related_name='anuncios', on_delete=models.CASCADE)
     titulo = models.CharField('Titulo', max_length=100)
     conteudo = models.TextField('Conteudo')
 

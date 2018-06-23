@@ -1,5 +1,21 @@
 {% extends "cursos/curso_dashboard.html" %}
 
 {% block dashboard_content %}
-<h2>Especificações do curso</h2>
+{% for anuncio in anuncios %}
+<div class="well">
+    <h2>{{ anuncio.titulo }}</h2>
+    {{ anuncio.conteudo|linebreaks }}
+    <p>
+        <a href="#comments" title=""><i class="fa fa-comments-o"></i>
+            {% with comentarios_count=anuncio.comentarios.count %}
+            {{ anuncio.comentarios.count }} Comentário{{ anuncio.comentarios.count|pluralize }}
+            {% endwith %}
+        </a>
+    </p>
+</div>
+{% empty %}
+<div class="well">
+    <h2>Nenhum anúncio criado</h2>
+</div>
+{% endfor %}
 {% endblock %}
