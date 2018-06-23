@@ -66,7 +66,7 @@ def undo_inscricao(request, slug):
     template = 'cursos/undo_inscricao.html'
     context = {
         'inscricao': inscricao,
-        'cursos': curso,
+        'curso': curso,
     }
     return render(request, template, context)
 
