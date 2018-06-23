@@ -102,7 +102,7 @@ def exibir_anuncio(request, slug, pk):
             messages.error(request, 'A sua inscrição está pendente!')
             return redirect('user:dashboard')
     template = 'cursos/exibir_anuncio.html'
-    anuncios = get_object_or_404(curso.Anuncio.all(), pk=pk)
+    anuncios = get_object_or_404(curso.anuncios.all(), pk=pk)
     context = {
         'curso': curso,
         'anuncios': anuncios,

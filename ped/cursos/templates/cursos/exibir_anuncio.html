@@ -3,12 +3,12 @@
 {% block dashboard_content %}
     <div class="well">
         <h2>{{ anuncio.titulo }}</h2>
-        {{ anuncio.conteudo|linabreaks }}
+        {{ anuncio.conteudo|linebreaks }}
     </div>
     <div class="well">
         <h4 id="comments">Comentários<a class=" fright" href="#add_comment">Comentar</a></h4>
         <hr />
-        {% for comentario in anuncio.comemtarios.all() %}
+        {% for comentario in anuncio.comentarios.all %}
         <p>
             <strong>{{ comentario.user }}</strong> disse à {{ comentario.created_at|timesince }} atrás: <br />
             {{ comentario.comentario|linebreaksbr }}
