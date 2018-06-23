@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Curso
+from .models import Curso, Inscricao, Anuncio, Comentario
 
 
 class CursoAdmin(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class CursoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Curso, CursoAdmin)
+admin.site.register([Inscricao, Anuncio, Comentario])

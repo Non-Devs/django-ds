@@ -84,6 +84,6 @@ def anuncios(request, slug):
             return redirect('user:dashboard')
     template = 'cursos/anuncios.html'
     context = {
-        'curso  ': curso
+        'curso': curso
     }
     return render(request, template, context)
