@@ -43,6 +43,8 @@ Dentro da VirtualEnv:
 
 `python -m pip install Pillow`
 
+`python -m pip install django-taggit`
+
 `cd .. && cd django-ds/`
 
 `python manage.py migrate`
