@@ -1,13 +1,16 @@
+from django.utils import timezone
+
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from ped.core.mail import send_mail_template
 
+
 class GerenciaCurso(models.Manager):
 
     def search(self, query):
         return self.get_queryset().filter(
-            models.Q(name__icontains=query) | \
+            models.Q(name__icontains=query) |
             models.Q(description__icontains=query))
 
 
@@ -61,6 +64,10 @@ class Curso(models.Model):
     def get_absolute_url(self):
         return reverse('cursos:details', kwargs={'slug': self.slug})
 
+    def release_lessons(self):
+        today = timezone.now().date()
+        return self.licoes.filter(release_date__gte=today)
+
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
@@ -77,13 +84,19 @@ class Lição(models.Model):
 
     release_date = models.DateField('Data de liberação', blank=True, null=True)
 
-    curso = models.ForeignKey(Curso, verbose_name='Curso', related_name='Lições', on_delete='CASCADE')
+    curso = models.ForeignKey(Curso, verbose_name='Curso', related_name='licoes', on_delete='CASCADE')
 
     created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 
     def __str__(self):
         return self.name
+
+    def is_avaliable(self):
+        if self.release_date:
+            today = timezone.now().date()
+            return self.release_date >= today
+        return False
 
     class Meta:
         verbose_name = 'Aula'

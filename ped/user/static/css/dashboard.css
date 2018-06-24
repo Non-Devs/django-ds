@@ -191,3 +191,13 @@ aside {
 aside p {
     margin: 0.4em 0;
 }
+.well {
+    border: 1px solid #ddd;
+    padding: 0em 1em 1em 1em;
+    margin-bottom: 1.5em;
+}
+
+table.a {
+    table-layout: auto;
+    width: 180px;
+}

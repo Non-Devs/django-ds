@@ -1,0 +1,53 @@
+{% extends "cursos/curso_dashboard.html" %}
+
+{% block breadcrumb %}
+    {{block.super}}
+        <li>/</li>
+        <li><a href="{% url 'cursos:licoes' curso.slug %}"> Aulas </a></li>
+        <li>/</li>
+        <li><a href="{% url 'cursos:licao' curso.slug licao.pk %}"> {{ licao }} </a></li>
+{% endblock %}
+
+
+{% block dashboard_content %}
+<div class="container">
+    <h2><a href="{% url 'cursos:licao' curso.slug licao.pk %}">{{ licao }}</a></h2>
+    {{ licao.description|linebreaks }}
+    <h4>Material da Aula</h4>
+    <table style="width: auto;"  class="table table-striped table-bordered ">
+        <thead >
+            <tr >
+                <th style="width:86%">
+                    Nome
+                </th>
+                <th >
+                    Ação
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for material in licao.materials.all %}
+            <tr>
+                <td>
+                    {{ material }}
+                </td>
+                <td>
+                    {% if material.is_embedded %}
+                    <a href="{% url 'cursos:material' curso.slug material.pk %}">
+                        <i class="fa fa-video-camera"></i>
+                        Acessar
+                    </a>
+                    {% else %}
+                    <a target="_blank" href="{{ material.file.url }}">
+                        <i class="fa fa-download"></i>
+                        Baixar
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

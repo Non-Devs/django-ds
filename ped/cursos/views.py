@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Curso, Inscricao, Anuncio
+from .models import Curso, Inscricao, Anuncio, Lição, Material
 from .forms import ContataCurso, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -101,5 +101,56 @@ def exibir_anuncio(request, slug, pk):
         'curso': curso,
         'anuncio': anuncios,
         'form': form,
+    }
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def licoes(request, slug):
+    curso = request.curso
+    template = 'cursos/licoes.html'
+    licoes = curso.release_lessons()
+    if request.user.is_staff:
+        licoes = curso.licoes.all()
+    context = {
+        'curso': curso,
+        'licoes': licoes
+    }
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def licao(request, slug, pk):
+    curso = request.curso
+    licao = get_object_or_404(Lição, pk=pk, curso=curso)
+    if not request.user.is_staff and not licao.is_avaliable():
+        messages.error(request, 'Esta aula não está dispoível')
+        return redirect('cursos;licoes', slug=curso.slug)
+    template = 'cursos/licao.html'
+    context = {
+        'curso': curso,
+        'licao': licao
+    }
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def material(request, slug, pk):
+    curso = request.curso
+    material = get_object_or_404(Material, pk=pk, licao__curso=curso)
+    licao = material.licao
+    if not request.user.is_staff and not licao.is_avaliable():
+        messages.error(request, 'Esta material não está dispoível')
+        return redirect('cursos;licao', slug=curso.slug, pk=licao.pk)
+    if not material.is_embedded():
+        return redirect(material.file.url)
+    template = 'cursos/material.html'
+    context = {
+        'curso': curso,
+        'licao': licao,
+        'material': material
     }
     return render(request, template, context)

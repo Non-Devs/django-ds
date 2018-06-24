@@ -12,13 +12,13 @@
     <h5>{{curso}}</h5>
 
     <i class="fa fa-video-camera"></i>
-    <a href="#">Aulas e Materiais</a>
+    <a href="{% url 'cursos:licoes' curso.slug %}">Aulas e Materiais</a>
     <br>
     <i class="fa fa-info-circle"></i>
     <a href="#">Informações</a>
     <br>
     <i class="fa fa-envelope"></i>
-    <a href="#">Anuncios</a>
+    <a href="{% url 'cursos:anuncios' curso.slug %}">Anuncios</a>
     <br>
     <i class="fa fa-comments"></i>
     <a href="#">Forum de Duvidas</a>
