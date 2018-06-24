@@ -67,6 +67,51 @@ class Curso(models.Model):
         ordering = ['name']
 
 
+class Lição(models.Model):
+
+    name = models.CharField("Nome", max_length=100)
+
+    description = models.TextField('Descrição', blank=True)
+
+    number = models.IntegerField('Números(ordem)', blank=True, default=0)
+
+    release_date = models.DateField('Data de liberação', blank=True, null=True)
+
+    curso = models.ForeignKey(Curso, verbose_name='Curso', related_name='Lições', on_delete='CASCADE')
+
+    created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Aula'
+        verbose_name_plural = 'Aulas'
+        ordering = ['number']
+
+
+class Material(models.Model):
+
+    name = models.CharField("Nome", max_length=100)
+
+    embedded = models.TextField('Video embedded', blank=True)
+
+    file = models.FileField(upload_to='licoes/materiais', blank=True, null=True)
+
+    licao = models.ForeignKey(Lição, verbose_name='aula', related_name='materials', on_delete='CASCADE')
+
+    def is_embedded(self):
+        return bool(self.embedded)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Material'
+        verbose_name_plural = 'Materiais'
+
+
 class Inscricao(models.Model):
 
     STATUS_CHOICES = (
@@ -172,3 +217,8 @@ models.signals.post_save.connect(
     sender=Anuncio,
     dispatch_uid='post_sabe_anuncio'
 )
+
+
+
+
+
