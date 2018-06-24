@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # libs
+    'taggit',
+    # apps
     'ped.core',
     'ped.user',
+    'ped.forum',
     'ped.cursos',
 ]
 
