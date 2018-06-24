@@ -6,7 +6,15 @@
         {{ anuncio.conteudo|linebreaks }}
     </div>
     <div class="well">
-        <h4 id="comments">Comentários<a class=" fright" href="#add_comment">Comentar</a></h4>
+        <div class="row">
+            <div class="col">
+                <h4 id="comments">Comentários</h4>
+            </div>
+            <div class="col"></div>
+            <div class="col-auto">
+                <a class="right" href="#add_comment">Comentar</a>
+            </div>
+        </div>
         <hr />
         {% for comentario in anuncio.comentarios.all %}
         <p>
