@@ -1,5 +1,11 @@
 {% extends "cursos/curso_dashboard.html" %}
 
+{% block breadcrumb %}
+    {{block.super}}
+        <li>/</li>
+        <li><a href="{% url 'cursos:exibir_anuncio' curso.slug  anuncio.pk%}"> {{anuncio}}</a></li>
+{% endblock %}
+
 {% block dashboard_content %}
     <div class="well">
         <h2>{{ anuncio.titulo }}</h2>
@@ -28,11 +34,15 @@
         </p>
         {% endfor %}
         <form method="post" class="well" id="add_comment">
+            {% csrf_token %}
             <fieldset>
+                {% for field in form %}
                 <div class="well">
-                    <label>Comentário</label>
-                    <textarea cols="40" rows="4"></textarea>
+                    {{ fiel.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
                 </div>
+                {% endfor %}
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </fieldset
         </form>

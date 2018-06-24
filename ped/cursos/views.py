@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Curso, Inscricao, Anuncio
-from .forms import ContataCurso
+from .forms import ContataCurso, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -101,10 +101,19 @@ def exibir_anuncio(request, slug, pk):
         if not inscricao.is_approved():
             messages.error(request, 'A sua inscrição está pendente!')
             return redirect('user:dashboard')
-    template = 'cursos/exibir_anuncio.html'
+    form = CommentForm(request.POST or None)
     anuncios = get_object_or_404(curso.anuncios.all(), pk=pk)
+    if form.is_valid():
+        comentario = form.save(commit=False)
+        comentario.user = request.user
+        comentario.anuncio = anuncios
+        comentario.save()
+        form = CommentForm()
+        messages.success(request, 'Seu comentário foi enviado com sucesso')
+    template = 'cursos/exibir_anuncio.html'
     context = {
         'curso': curso,
-        'anuncios': anuncios,
+        'anuncio': anuncios,
+        'form': form,
     }
     return render(request, template, context)
