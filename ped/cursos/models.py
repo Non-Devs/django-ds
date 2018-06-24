@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-
+from ped.core.mail import send_mail_template
 
 class GerenciaCurso(models.Manager):
 
@@ -118,6 +118,7 @@ class Inscricao(models.Model):
         verbose_name_plural = 'Inscrições'
         unique_together = (('user', 'curso'),)
 
+
 class Anuncio(models.Model):
 
     cursos = models.ForeignKey(Curso, verbose_name='Curso',related_name='anuncios', on_delete=models.CASCADE)
@@ -135,6 +136,7 @@ class Anuncio(models.Model):
         verbose_name_plural = 'Anúncios'
         ordering = ['-created_at']
 
+
 class Comentario(models.Model):
     anuncio = models.ForeignKey(Anuncio, verbose_name = 'Anúncio', related_name='comentarios', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='usuário', on_delete=models.CASCADE)
@@ -147,3 +149,26 @@ class Comentario(models.Model):
         verbose_name = 'Comentário'
         verbose_name_plural = 'Comentários'
         ordering = ['-created_at']
+
+
+def post_save_anuncio(instance, created, **kwargs):
+    if created:
+        subject = instance.titulo
+        context = {
+            'anuncio': instance,
+        }
+        template_name = 'cursos/anuncios_email.html'
+        inscricoes = Inscricao.objects.filter(
+            curso=instance.cursos,
+            status=1
+        )
+        for inscricao in inscricoes:
+            recipient_list = [inscricao.user.email]
+            send_mail_template(subject, template_name, context, recipient_list)
+
+
+models.signals.post_save.connect(
+    post_save_anuncio,
+    sender=Anuncio,
+    dispatch_uid='post_sabe_anuncio'
+)
