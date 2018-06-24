@@ -3,7 +3,7 @@ from .models import Curso, Inscricao, Anuncio
 from .forms import ContataCurso, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from .decorators import enrollment_required
 
 def index(request):
 
@@ -70,18 +70,11 @@ def undo_inscricao(request, slug):
     }
     return render(request, template, context)
 
+
 @login_required
+@enrollment_required
 def anuncios(request, slug):
-    curso = get_object_or_404(Curso, slug=slug)
-    if not request.user.is_staff:
-        inscricao = get_object_or_404(
-            Inscricao,
-            user=request.user,
-            curso=curso
-        )
-        if not inscricao.is_approved():
-            messages.error(request, 'A sua inscrição está pendente!')
-            return redirect('user:dashboard')
+    curso = request.curso
     template = 'cursos/anuncios.html'
     context = {
         'curso': curso,
@@ -89,18 +82,11 @@ def anuncios(request, slug):
     }
     return render(request, template, context)
 
+
 @login_required
+@enrollment_required
 def exibir_anuncio(request, slug, pk):
-    curso = get_object_or_404(Curso, slug=slug)
-    if not request.user.is_staff:
-        inscricao = get_object_or_404(
-            Inscricao,
-            user=request.user,
-            curso=curso
-        )
-        if not inscricao.is_approved():
-            messages.error(request, 'A sua inscrição está pendente!')
-            return redirect('user:dashboard')
+    curso = request.curso
     form = CommentForm(request.POST or None)
     anuncios = get_object_or_404(curso.anuncios.all(), pk=pk)
     if form.is_valid():
