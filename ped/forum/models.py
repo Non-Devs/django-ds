@@ -31,6 +31,12 @@ class Thread(models.Model):
 
 class Reply(models.Model):
 
+    thread = models.ForeignKey(
+        Thread,
+        verbose_name='Topico',
+        related_name='replies',
+        on_delete='CASCADE',
+    )
     reply = models.TextField('Resposta')
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -48,4 +54,4 @@ class Reply(models.Model):
     class Meta:
         verbose_name = 'Resposta'
         verbose_name_plural = 'Respostas'
-        ordering = ['-correct','created']
+        ordering = ['-correct', 'created']

@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('ped.core.urls')),
     path('cursos/', include('ped.cursos.urls')),
     path('conta/', include('ped.user.urls')),
+    path('forum/', include('ped.forum.urls')),
     path('admin/', admin.site.urls),
 ]   
 
