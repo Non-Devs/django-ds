@@ -4,14 +4,7 @@
 <form action="" method="post">
     {% csrf_token %}
     <h3>Você deseja cancelar a inscrição deste curso?</h3>
-<div class="row">
-    <div class="col"></div>
-    <div class="col-auto">
     <button class="btn btn-success  mr-2"> Confirmar </button>
+    <a href="{% url 'cursos:anuncios' curso.slug %}" class="btn btn-danger  mr-4" > Voltar </a>
 </form>
-    </div>
-    <div class="col-auto">
-    <a href="{% url 'cursos:anuncios' curso.slug %}"><button class="btn btn-danger  mr-4" > Voltar </button> </a>
-    </div>
-</div>
 {% endblock %}
