@@ -15,13 +15,13 @@
     <a href="{% url 'cursos:licoes' curso.slug %}">Aulas e Materiais</a>
     <br>
     <i class="fa fa-info-circle"></i>
-    <a href="#">Informações</a>
+    <a href="{% url 'cursos:details' curso.slug %}">Informações</a>
     <br>
     <i class="fa fa-envelope"></i>
     <a href="{% url 'cursos:anuncios' curso.slug %}">Anuncios</a>
     <br>
     <i class="fa fa-comments"></i>
-    <a href="#">Forum de Duvidas</a>
+    <a href="{% url 'forum:index' %}">Forum de Duvidas</a>
 </ul>
 {{ block.super }}
 {% endblock %}
